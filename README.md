@@ -29,6 +29,7 @@
 ## How to run
 1. Clone the repository
 2. Run `npm install` to install the dependencies
+* * If Errors use `npm install --legacy-peer-deps` instead of `npm install`
 
 ## How to use
 1. Run `npm start` to start the app
