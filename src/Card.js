@@ -1,5 +1,6 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faStar } from '@fortawesome/free-solid-svg-icons';
+import { Link } from 'react-router-dom';
 
 const MovieCard = ({ movie, onAddMovie, isMovieAdded, animation }) => {
     return (
@@ -19,7 +20,7 @@ const MovieCard = ({ movie, onAddMovie, isMovieAdded, animation }) => {
                     {movie.overview.substring(0, 70)}...
                 </p>
                 <div className="d-flex justify-content-center">
-                    <a href={`/movie/${movie.id}`} className="btn btn-dark rounded-0">Go to Film Page</a>
+                    <Link to={`/movie/${movie.id}`} className="btn btn-dark rounded-0">Go to Film Page</Link>
                 </div>
             </div>
         </div >

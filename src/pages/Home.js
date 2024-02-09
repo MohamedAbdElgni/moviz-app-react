@@ -3,24 +3,23 @@ import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import MovieCard from "../Card";
 import { ADD_MOVIE, REMOVE_MOVIE } from "../Store/Actions/MovieAction";
-import { GetMovizList } from "../Store/Actions/GetMovizAction";
+import { GetAllMovies} from "../Store/Actions/GetMovizAction";
 
 
 function Home() {
     const dispatch = useDispatch();
-    const movis = useSelector(state => state.combinMovizList.moviz);
-    const lang = useSelector(state => state.combinlang.lang);
+    const movis = useSelector(state => state.combinMovizList.movieList);
+
     const [page, setPage] = useState(1);
     const totalPages = 300;
     const movieList = useSelector(state => state.combinmovie.movieList);
-    //const lang = useSelector(state => state.combinlang.lang);
+    const lang = useSelector(state => state.combinlang.lang);
+
+
 
     useEffect(() => {
-
-        dispatch(GetMovizList(page, lang));
-    });
-
-
+        dispatch(GetAllMovies(page, lang));
+    }, [page, dispatch, lang]);
 
     const handelAddMovie = (mov) => {
         if (movieList.some((movie) => movie.id === mov.id)) {

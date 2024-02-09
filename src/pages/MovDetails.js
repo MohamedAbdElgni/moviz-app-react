@@ -1,20 +1,20 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
 import { useParams } from 'react-router-dom'
-import axios from 'axios'
-
+import { useDispatch, useSelector } from 'react-redux'
+import { GetMovieDetails } from '../Store/Actions/GetMovizAction'
 function MovDetails() {
     const { mid } = useParams()
-    const [movie, setMovie] = useState([])
+    const dispatch = useDispatch()
+    const movie = useSelector(state => state.combinMovizList.moviz)
+    const lang = useSelector(state => state.combinlang.lang)
     useEffect(() => {
-        const apiKey = "f70cf3e46e9ae3664a9c8aae2c4ec8ac";
-        //https://api.themoviedb.org/3/movie/880009?api_key={apiKey}
-        const apiUrl = `https://api.themoviedb.org/3/movie/${mid}?api_key=${apiKey}`;
-        axios.get(apiUrl)
+        console.log(mid, lang)
+        console.log(movie)
+        dispatch(GetMovieDetails(mid, lang));
+    }, [mid, lang, dispatch , movie])
 
-            .then((res) => setMovie(res.data))
-            .catch((err) => console.error(err));
-    }
-        , [mid]);
+
+   
 
 
 

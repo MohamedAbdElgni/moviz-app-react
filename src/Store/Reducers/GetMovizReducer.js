@@ -18,6 +18,16 @@ export default function GetMovizReducer(state = INITIAL_VALUE, action) {
                 ...state,
                 moviz: action.payload
             }
+        case "GET_MOVIE_DETAILS":
+            return {
+                ...state,
+                moviz: action.payload
+            }
+        case 'ALL_MOVIES':
+            return {
+                ...state,
+                movieList: action.payload
+            }
         default:
             return state;
     }

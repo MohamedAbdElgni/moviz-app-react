@@ -16,6 +16,7 @@ export default function MovieReducer(state = INITIAL_VALUE, action) {
                 ...state,
                 movieList: [...state.movieList.filter((mov) => mov.id !== action.payload.id)]
             }
+        
         default:
             return state
     }
