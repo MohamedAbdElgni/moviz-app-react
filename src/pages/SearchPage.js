@@ -1,16 +1,16 @@
-import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import MovieCard from "../Card";
 import { ADD_MOVIE, REMOVE_MOVIE } from "../Store/Actions/MovieAction";
 import { useDispatch } from 'react-redux';
+import { GetMovizListBySearch } from '../Store/Actions/GetMovizAction';
 function SearchPage(props) {
     const dispatch = useDispatch();
     const location = useLocation();
     const [q, setQ] = useState('');
-    const [movis, setMovies] = useState([]);
-    
+    const movis = useSelector(state => state.combinMovizList.moviz);
+
     const lang = useSelector(state => state.combinlang.lang);
     const movieList = useSelector(state => state.combinmovie.movieList);
     const handelAddMovie = (mov) => {
@@ -27,15 +27,13 @@ function SearchPage(props) {
         setQ(search.get('q'));
 
         if (q) {
-            axios.get(`https://api.themoviedb.org/3/search/movie?api_key=f70cf3e46e9ae3664a9c8aae2c4ec8ac&query=${q} &language=${lang}`)
-                .then((res) => setMovies(res.data.results))
-                .catch((err) => console.error(err));
+            dispatch(GetMovizListBySearch(1, lang, q));
         }
 
-        
-    }, [location.search, q, lang, movieList]);
 
-    
+    }, [q, lang, location.search, dispatch]);
+
+
 
 
 

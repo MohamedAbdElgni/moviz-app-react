@@ -1,18 +1,25 @@
-import axios from "axios";
+
 import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import MovieCard from "../Card";
 import { ADD_MOVIE, REMOVE_MOVIE } from "../Store/Actions/MovieAction";
-
+import { GetMovizList } from "../Store/Actions/GetMovizAction";
 
 
 function Home() {
     const dispatch = useDispatch();
-    const [movis, setMovs] = useState([]);
+    const movis = useSelector(state => state.combinMovizList.moviz);
+    const lang = useSelector(state => state.combinlang.lang);
     const [page, setPage] = useState(1);
     const totalPages = 300;
     const movieList = useSelector(state => state.combinmovie.movieList);
-    const lang = useSelector(state => state.combinlang.lang);
+    //const lang = useSelector(state => state.combinlang.lang);
+
+    useEffect(() => {
+
+        dispatch(GetMovizList(page, lang));
+    });
+
 
 
     const handelAddMovie = (mov) => {
@@ -20,28 +27,31 @@ function Home() {
             dispatch(REMOVE_MOVIE(mov));
 
         } else {
-            dispatch(ADD_MOVIE(mov));
+            dispatch(ADD_MOVIE(mov))
 
         }
     }
 
-    useEffect(() => {
-
-
-    }, [movieList]);
 
 
 
 
 
-    useEffect(() => {
-        const apiKey = "f70cf3e46e9ae3664a9c8aae2c4ec8ac";
-        const apiUrl = `https://api.themoviedb.org/3/movie/popular?api_key=${apiKey}&page=${page}&language=${lang}`;
 
-        axios.get(apiUrl)
-            .then((res) => setMovs(res.data.results))
-            .catch((err) => console.error(err));
-    }, [page, lang]);
+
+
+
+
+
+
+
+    //     const apiKey = "f70cf3e46e9ae3664a9c8aae2c4ec8ac";
+    //     const apiUrl = `https://api.themoviedb.org/3/movie/popular?api_key=${apiKey}&page=${page}&language=${lang}`;
+
+    //     axios.get(apiUrl)
+    //         .then((res) => setMovs(res.data.results))
+    //         .catch((err) => console.error(err));
+
 
 
 
