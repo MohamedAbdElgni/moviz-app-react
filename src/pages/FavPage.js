@@ -1,25 +1,20 @@
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
-
+import { ADD_MOVIE, REMOVE_MOVIE } from "../Store/Actions/MovieAction";
 import MovieCard from "../Card";
 function FavPage() {
     const dispatch = useDispatch();
-    const movieList = useSelector(state => state.movieList);
-    const counter = useSelector(state => state.counter);
-
-    
-
-
-    
+    const movieList = useSelector(state => state.combinmovie.movieList);
+    const counter = movieList.length;
     const handelAddMovie = (mov) => {
         if (movieList.some((movie) => movie.id === mov.id)) {
-            dispatch({ type: "REMOVE_MOVIE", payload: mov });
-            dispatch({ type: "counter", payload: counter });
+            dispatch(REMOVE_MOVIE(mov));
         } else {
-            dispatch({ type: "ADD_MOVIE", payload: mov });
-            dispatch({ type: "counter", payload: counter });
+            dispatch(ADD_MOVIE(mov));
         }
-    };
+    }
+
+
 
 
 

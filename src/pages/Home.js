@@ -2,30 +2,35 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import MovieCard from "../Card";
+import { ADD_MOVIE, REMOVE_MOVIE } from "../Store/Actions/MovieAction";
+
+
 
 function Home() {
     const dispatch = useDispatch();
     const [movis, setMovs] = useState([]);
     const [page, setPage] = useState(1);
     const totalPages = 300;
-    const movieList = useSelector(state => state.movieList);
-    const lang = useSelector(state => state.lang);
+    const movieList = useSelector(state => state.combinmovie.movieList);
+    const lang = useSelector(state => state.combinlang.lang);
 
 
     const handelAddMovie = (mov) => {
+        console.log(mov.id);
+        console.log(movieList);
         if (movieList.some((movie) => movie.id === mov.id)) {
-            dispatch({ type: "REMOVE_MOVIE", payload: mov });
+            dispatch(REMOVE_MOVIE(mov));
 
         } else {
-            dispatch({ type: "ADD_MOVIE", payload: mov });
+            dispatch(ADD_MOVIE(mov));
 
         }
-    };
+    }
 
     useEffect(() => {
 
 
-    }, [movieList,]);
+    }, [movieList]);
 
 
 
@@ -47,6 +52,7 @@ function Home() {
     const handelPrev = () => {
         setPage(page - 1);
     };
+
 
     const generatePageNumbers = () => {
         const pageNumbers = [];

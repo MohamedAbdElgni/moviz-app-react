@@ -1,22 +1,10 @@
 const INITIAL_VALUE = {
-    lang: 'en',
-    theme: 'light',
     movieList: [],
-    counter: 0
 
 }
-export default function Reducer(state = INITIAL_VALUE, action) {
+
+export default function MovieReducer(state = INITIAL_VALUE, action) {
     switch (action.type) {
-        case 'CHANGE_LANG':
-            return {
-                ...state,
-                lang: action.payload
-            }
-        case 'counter':
-            return {
-                ...state,
-                counter: action.payload
-            }
         case 'ADD_MOVIE':
             return {
                 ...state,
@@ -28,11 +16,8 @@ export default function Reducer(state = INITIAL_VALUE, action) {
                 ...state,
                 movieList: [...state.movieList.filter((mov) => mov.id !== action.payload.id)]
             }
-
-
-
-
         default:
             return state
     }
 }
+

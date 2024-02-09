@@ -4,14 +4,15 @@ import { Link } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
-
+import { changeLang } from './Store/Actions/LangAction';
 
 
 const NavBarTop = () => {
 
   // favorite movies counter
-  const counter = useSelector(state => state.counter);
-  const movieList = useSelector(state => state.movieList);
+
+  const movieList = useSelector(state => state.combinmovie.movieList);
+  const counter = movieList.length;
   const [searchQuery, setSearchQuery] = useState('')
   const dispatch = useDispatch();
 
@@ -29,21 +30,18 @@ const NavBarTop = () => {
     //console.log(searchQuery);
 
   }
-  const lang = useSelector(state => state.lang);
+  const lang = useSelector(state => state.combinlang.lang);
 
-
+  console.log(lang);
   useEffect(() => {
-    dispatch({ type: "counter", payload: movieList.length });
+    dispatch(changeLang(lang));
   }
-    , [lang, movieList.length, dispatch]);
+    , [lang, movieList, dispatch]);
 
   const handelChangeLang = (e) => {
-    dispatch({
-      type: "CHANGE_LANG",
-      payload: e.target.value
-    })
-    console.log(e.target.value);
+    dispatch(changeLang(e.target.value));
   }
+
 
 
 
