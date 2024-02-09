@@ -8,7 +8,7 @@ import ErrorPage from './pages/ErrorPage';
 import { BrowserRouter, Route, Switch } from 'react-router-dom/cjs/react-router-dom.min';
 import MovDetails from './pages/MovDetails'
 import SearchPage from './pages/SearchPage';
-import  FavPage from './pages/FavPage';
+import FavPage from './pages/FavPage';
 import Footer from './foot';
 function App() {
   return (

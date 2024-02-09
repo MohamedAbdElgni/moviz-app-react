@@ -16,8 +16,6 @@ function Home() {
 
 
     const handelAddMovie = (mov) => {
-        console.log(mov.id);
-        console.log(movieList);
         if (movieList.some((movie) => movie.id === mov.id)) {
             dispatch(REMOVE_MOVIE(mov));
 
@@ -44,6 +42,8 @@ function Home() {
             .then((res) => setMovs(res.data.results))
             .catch((err) => console.error(err));
     }, [page, lang]);
+
+
 
     const handelNext = () => {
         setPage(page + 1);

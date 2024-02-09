@@ -32,7 +32,6 @@ const NavBarTop = () => {
   }
   const lang = useSelector(state => state.combinlang.lang);
 
-  console.log(lang);
   useEffect(() => {
     dispatch(changeLang(lang));
   }
