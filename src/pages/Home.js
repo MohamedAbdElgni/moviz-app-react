@@ -11,23 +11,25 @@ function Home() {
     const movieList = useSelector(state => state.movieList);
     const lang = useSelector(state => state.lang);
 
-    const handelIncCounter = () => {
-        dispatch({ type: "INC_COUNTER" });
-    };
-
-    const handelDecCounter = () => {
-        dispatch({ type: "DEC_COUNTER" });
-    };
 
     const handelAddMovie = (mov) => {
         if (movieList.some((movie) => movie.id === mov.id)) {
             dispatch({ type: "REMOVE_MOVIE", payload: mov });
-            handelDecCounter();
+
         } else {
             dispatch({ type: "ADD_MOVIE", payload: mov });
-            handelIncCounter();
+
         }
     };
+
+    useEffect(() => {
+
+
+    }, [movieList,]);
+
+
+
+
 
     useEffect(() => {
         const apiKey = "f70cf3e46e9ae3664a9c8aae2c4ec8ac";

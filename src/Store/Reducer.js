@@ -12,26 +12,16 @@ export default function Reducer(state = INITIAL_VALUE, action) {
                 ...state,
                 lang: action.payload
             }
-        case 'CHANGE_THEME':
+        case 'counter':
             return {
                 ...state,
-                theme: action.payload
-            }
-        case 'INC_COUNTER':
-            return {
-                ...state,
-                counter: state.counter + 1
-            }
-        case 'DEC_COUNTER':
-            return {
-                ...state,
-                counter: state.counter - 1
+                counter: action.payload
             }
         case 'ADD_MOVIE':
             return {
                 ...state,
-                
-                movieList: [ ...state.movieList,action.payload]
+
+                movieList: [...state.movieList, action.payload]
             }
         case 'REMOVE_MOVIE':
             return {

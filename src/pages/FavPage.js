@@ -3,31 +3,21 @@ import { useDispatch } from "react-redux";
 
 import MovieCard from "../Card";
 function FavPage() {
-
+    const dispatch = useDispatch();
     const movieList = useSelector(state => state.movieList);
     const counter = useSelector(state => state.counter);
 
-    const dispatch = useDispatch();
+    
 
 
-    const handelDecCounter = () => {
-        dispatch({
-            type: "DEC_COUNTER",
-        });
-    };
+    
     const handelAddMovie = (mov) => {
         if (movieList.some((movie) => movie.id === mov.id)) {
-
-            dispatch({
-                type: "REMOVE_MOVIE",
-                payload: mov,
-            });
-            handelDecCounter();
+            dispatch({ type: "REMOVE_MOVIE", payload: mov });
+            dispatch({ type: "counter", payload: counter });
         } else {
-            dispatch({
-                type: "ADD_MOVIE",
-                payload: mov,
-            });
+            dispatch({ type: "ADD_MOVIE", payload: mov });
+            dispatch({ type: "counter", payload: counter });
         }
     };
 

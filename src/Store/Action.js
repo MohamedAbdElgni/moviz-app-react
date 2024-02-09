@@ -13,15 +13,10 @@ export const changeTheme=(payload)=>{
     }
 }
 
-export const INC_COUNTER=()=>{
+export const counter=(payload)=>{
     return {
-        type:'INC_COUNTER'
-    }
-}
-
-export const DEC_COUNTER=()=>{
-    return {
-        type:'DEC_COUNTER'
+        type:'counter',
+        payload:payload
     }
 }
 

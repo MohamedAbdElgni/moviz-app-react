@@ -9,16 +9,13 @@ import { useDispatch } from 'react-redux';
 
 const NavBarTop = () => {
 
-
-  const favcounter = useSelector(state => state.counter);
-
-
-
-
-
-
-
+  // favorite movies counter
+  const counter = useSelector(state => state.counter);
+  const movieList = useSelector(state => state.movieList);
   const [searchQuery, setSearchQuery] = useState('')
+  const dispatch = useDispatch();
+
+
 
   const GetChange = (e) => {
 
@@ -33,12 +30,12 @@ const NavBarTop = () => {
 
   }
   const lang = useSelector(state => state.lang);
-  const dispatch = useDispatch();
+
 
   useEffect(() => {
-    //console.log(lang);
+    dispatch({ type: "counter", payload: movieList.length });
   }
-    , [lang]);
+    , [lang, movieList.length, dispatch]);
 
   const handelChangeLang = (e) => {
     dispatch({
@@ -92,7 +89,7 @@ const NavBarTop = () => {
 
               <Link
                 className='nav-link text-dark' to='/fav'>
-                Favorites <span className="badge bg-success">{favcounter}</span>
+                Favorites <span className="badge bg-success">{counter}</span>
               </Link>
             </li>
 
