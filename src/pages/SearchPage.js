@@ -1,21 +1,24 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
+import { useSelector } from 'react-redux';
+
 function SearchPage(props) {
     const location = useLocation();
     const [q, setQ] = useState('');
     const [movies, setMovies] = useState([]);
+    const lang = useSelector(state => state.lang);
 
     useEffect(() => {
         const search = new URLSearchParams(location.search);
         setQ(search.get('q'));
 
         if (q) {
-            axios.get(`https://api.themoviedb.org/3/search/movie?api_key=f70cf3e46e9ae3664a9c8aae2c4ec8ac&query=${q}`)
+            axios.get(`https://api.themoviedb.org/3/search/movie?api_key=f70cf3e46e9ae3664a9c8aae2c4ec8ac&query=${q} &language=${lang}`)
                 .then((res) => setMovies(res.data.results))
                 .catch((err) => console.error(err));
         }
-    }, [location.search, q]);
+    }, [location.search, q, lang]);
 
 
 

@@ -1,15 +1,18 @@
 
 import { Navbar, Nav, Form, FormControl, Button } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
-
+import { useDispatch } from 'react-redux';
 
 
 
 const NavBarTop = () => {
 
+
   const favcounter = useSelector(state => state.counter);
+
+
 
 
 
@@ -29,6 +32,23 @@ const NavBarTop = () => {
     //console.log(searchQuery);
 
   }
+  const lang = useSelector(state => state.lang);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    //console.log(lang);
+  }
+    , [lang]);
+
+  const handelChangeLang = (e) => {
+    dispatch({
+      type: "CHANGE_LANG",
+      payload: e.target.value
+    })
+    console.log(e.target.value);
+  }
+
+
 
 
 
@@ -69,11 +89,20 @@ const NavBarTop = () => {
               </Link>
             </li>
             <li className='nav-item nav-item '>
-              
+
               <Link
                 className='nav-link text-dark' to='/fav'>
                 Favorites <span className="badge bg-success">{favcounter}</span>
               </Link>
+            </li>
+
+            {/*Change Language */}
+            <li className='nav-item nav-item ps-sm-5 '>
+              <select className="form-select" aria-label="Default select example" value={lang} onChange={(e) => handelChangeLang(e)} >
+                <option value="en" >English</option>
+                <option value="ar">Arabic</option>
+                <option value="fr">French</option>
+              </select>
             </li>
 
           </Nav>
